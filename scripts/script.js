@@ -1,25 +1,40 @@
 const letterContainer = document.querySelector('.letters');
 const blanks = document.querySelector('.blanks')
-const section = document.querySelector('section')
+
 
 const alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
-alphabets.map((element) => {
-    const buttons = document.createElement('button')
-    buttons.id = element;
-    buttons.innerText = element;
-    letterContainer.appendChild(buttons)
-})
 
 fetch('https://random-word-api.herokuapp.com/word?number=1')
     .then((response) => response.json())
     .then((data) => {
         const singleLetters = data[0].split('')
         console.log(singleLetters)
-        singleLetters.map((element) => {
-            section.innerText += " ___ "
+        singleLetters.forEach((element) => {
+            const span = document.createElement('span')
+            span.classList.add("letter-"+ element)
+            span.innerHTML = " __ "
+            blanks.append(span)
+            // const sectionArray = Array.from(section)
+            // console.log(sectionArray)
+
+            // sectionArray.push(" ___ ")
+        })
+
+        alphabets.map((element) => {
+            const buttons = document.createElement('button')
+            buttons.id = element;
+            buttons.innerText = element;
+            letterContainer.appendChild(buttons)
+            buttons.addEventListener("click", (e)=> {
+                // console.log(buttons.innerHTML)
+            for (i = 0; i < singleLetters.length; i++){
+                if (buttons.innerText === singleLetters[i]){
+                    
+                }}
+            })
         })
     })
+
 
 let wrongCounter = 1;
 
